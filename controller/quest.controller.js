@@ -6,9 +6,14 @@ var questController = {
     updateQuest: updateQuest,
     deleteQuestById: deleteQuestById
 }
-
-deleteMessage = "Quest deleted successfully";
-updateMessage = "Quest updated successfully";
+let deleteResponse = {
+    message: "Quest deleted successfully",
+    quest: null
+}
+let updateResponse = {
+    message: "Quest updated successfully",
+    quest: null
+}
 
 function addQuest(req, res) {
     let quest = req.body;
@@ -33,10 +38,8 @@ function findQuestById(req, res) {
 
 function deleteQuestById(req, res) {
     questDao.deleteById(req.params.id).then((data) => {
-        res.status(200).json({
-            message: deleteMessage,
-            quest: data
-        })
+        deleteResponse.quest = data;
+        res.status(200).send(deleteResponse)
     })
         .catch((error) => {
             console.log(error);
@@ -46,10 +49,8 @@ function deleteQuestById(req, res) {
 
 function updateQuest(req, res) {
     questDao.updateQuest(req.body, req.params.id).then((data) => {
-        res.status(200).json({
-            message: updateMessage,
-            quest: data
-        })
+        updateResponse.quest = data;
+        res.status(200).send(updateResponse)
     })
         .catch((error) => {
             console.log(error);
