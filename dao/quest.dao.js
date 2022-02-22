@@ -1,37 +1,38 @@
-const Gig = require('../models/Gig');
-var gigDao = {
+const Quest = require('../model/Quest');
+var questDao = {
     findAll: findAll,
     create: create,
     findById: findById,
     deleteById: deleteById,
-    updateGig: updateGig
+    updateQuest: update
 }
 
 function findAll() {
-    return Gig.findAll();
+    return Quest.findAll();
 }
 
 function findById(id) {
-    return Gig.findByPk(id);
+    return Quest.findByPk(id);
 }
 
 function deleteById(id) {
-    return Gig.destroy({ where: { id: id } });
+    return Quest.destroy({where: {id: id}});
 }
 
-function create(gig) {
-    var newGig = new Gig(gig);
-    return newGig.save();
+function create(quest) {
+    var newQuest = new Quest(quest);
+    return newQuest.save();
 }
 
-function updateGig(gig, id) {
-    var updateGig = {
-        title: gig.title,
-        technologies: gig.technologies,
-        description: gig.description,
-        budget: gig.budget,
-        contact_email: gig.contact_email
+function update(quest, id) {
+    var updateQuest = {
+        title: quest.title,
+        isDone: quest.isDone,
+        description: quest.description,
+        isUrgent: quest.isUrgent,
+        isImportant: quest.isImportant
     };
-    return Gig.update(updateGig, { where: { id: id } });
+    return Quest.update(updateQuest, {where: {id: id}});
 }
-module.exports = gigDao;
+
+module.exports = questDao;

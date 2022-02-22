@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const gigRoutes = require('./gigs.route');
+const questRoutes = require('./quest.route');
 
-router.use('/gigs', gigRoutes);
+router.use('/quests', questRoutes);
 module.exports = router;

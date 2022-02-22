@@ -1,11 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const gigController = require('../controller/gig.controller');
+const questController = require('../controller/quest.controller');
 
-router.post('/', gigController.addGig);
-router.get('/', gigController.findGigs);
-router.get('/:id', gigController.findGigById);
-router.put('/:id', gigController.updateGig);
-router.delete('/:id', gigController.deleteById);
+router.post('/', questController.addQuest);
+router.get('/', questController.findQuest);
+router.get('/:id', questController.findQuestById);
+router.put('/:id', questController.updateQuest);
+router.delete('/:id', questController.deleteQuestById);
 
 module.exports = router;

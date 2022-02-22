@@ -1,5 +1,5 @@
-const gigDao = require('../dao/gig.dao');
-var gigController = {
+const questDao = require('../dao/quest.dao');
+var questController = {
     addQuest: addQuest,
     findQuest: findQuest,
     findQuestById: findQuestById,
@@ -7,9 +7,10 @@ var gigController = {
     deleteQuestById: deleteQuestById
 }
 
-function addGig(req, res) {
-    let gig = req.body;
-    gigDao.create(gig).then((data) => {
+function addQuest(req, res) {
+    let quest = req.body;
+    quest.isDone = false
+    questDao.create(quest).then((data) => {
         res.send(data);
     })
         .catch((error) => {
@@ -17,8 +18,8 @@ function addGig(req, res) {
         });
 }
 
-function findGigById(req, res) {
-    gigDao.findById(req.params.id).then((data) => {
+function findQuestById(req, res) {
+    questDao.findById(req.params.id).then((data) => {
         res.send(data);
     })
         .catch((error) => {
@@ -26,11 +27,11 @@ function findGigById(req, res) {
         });
 }
 
-function deleteById(req, res) {
-    gigDao.deleteById(req.params.id).then((data) => {
+function deleteQuestById(req, res) {
+    questDao.deleteById(req.params.id).then((data) => {
         res.status(200).json({
-            message: "Gig deleted successfully",
-            gig: data
+            message: "Quest deleted successfully",
+            quest: data
         })
     })
         .catch((error) => {
@@ -38,11 +39,11 @@ function deleteById(req, res) {
         });
 }
 
-function updateGig(req, res) {
-    gigDao.updateGig(req.body, req.params.id).then((data) => {
+function updateQuest(req, res) {
+    questDao.updateQuest(req.body, req.params.id).then((data) => {
         res.status(200).json({
-            message: "Gig updated successfully",
-            gig: data
+            message: "Quest updated successfully",
+            quest: data
         })
     })
         .catch((error) => {
@@ -50,8 +51,8 @@ function updateGig(req, res) {
         });
 }
 
-function findGigs(req, res) {
-    gigDao.findAll().then((data) => {
+function findQuest(req, res) {
+    questDao.findAll().then((data) => {
         res.send(data);
     })
         .catch((error) => {
@@ -59,4 +60,4 @@ function findGigs(req, res) {
         });
 }
 
-module.exports = gigController;
+module.exports = questController;
